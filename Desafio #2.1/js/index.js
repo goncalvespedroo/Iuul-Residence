@@ -1,5 +1,4 @@
-const validarDados = require('../models/model');
-
+const Ajv = require('../models/model');
 const fs = require('fs');
 
 const caminhoArquivo = './dados.json';
@@ -17,6 +16,4 @@ function lerArquivoJSON(caminhoArquivo) {
   }
 }
 
-const dadosJSON = lerArquivoJSON(caminhoArquivo);
-
-validarDados(dadosJSON);
+lerArquivoJSON(caminhoArquivo); 

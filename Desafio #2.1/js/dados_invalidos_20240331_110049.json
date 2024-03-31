@@ -1,0 +1,11 @@
+[
+  {
+    "instancePath": "/0/cpf",
+    "schemaPath": "#/items/properties/cpf/type",
+    "keyword": "type",
+    "params": {
+      "type": "number"
+    },
+    "message": "must be number"
+  }
+]
