@@ -80,6 +80,10 @@ const schemajs = {
     ]
 }
 
+const Ajv = require('ajv');
+const fs = require('fs');
+const { DateTime } = require('luxon');
+
 const ajv = new Ajv();
 
 // Compila o esquema
@@ -95,12 +99,25 @@ function validacao(verificador) {
     if (valid) {
         console.log('Os dados são válidos em relação ao esquema.');
         // Adicione aqui qualquer outra lógica que você queira executar quando os dados forem válidos
+
+        // Verifica se o arquivo de dados está vazio
+        if (dados.length === 0) {
+            // Cria um novo arquivo JSON com uma array vazia
+            const nomeArquivoVazio = `dados_vazios_${DateTime.now().toFormat('yyyyMMdd_HHmmss')}.json`;
+            fs.writeFile(nomeArquivoVazio, JSON.stringify([], null, 2), (err) => {
+                if (err) {
+                    console.error('Erro ao criar o arquivo JSON vazio:', err);
+                } else {
+                    console.log(`Arquivo JSON vazio criado: ${nomeArquivoVazio}`);
+                }
+            });
+        }
     } else {
         console.log('Os dados não são válidos em relação ao esquema.');
-        
+
         // Obter data e hora atuais
         const agora = DateTime.now().toFormat('yyyyMMdd_HHmmss');
-        
+
         // Criar nome do arquivo com a data e hora atuais
         const nomeArquivo = `dados_invalidos_${agora}.json`;
 
